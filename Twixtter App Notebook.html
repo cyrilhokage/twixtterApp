@@ -11911,13 +11911,63 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="prompt input_prompt">In&nbsp;[91]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">consumer_key</span> <span class="o">=</span> <span class="s1">&#39;RRZFSHS1Nw8xH4eRyBaftyFfh&#39;</span>
-<span class="n">consumer_secret</span> <span class="o">=</span> <span class="s1">&#39;xdw3qoO1OmwZsb95CpDNpY4X7nYOwwgGeAPN2y6oiI9xP6Xkbx&#39;</span>
-<span class="n">access_token</span> <span class="o">=</span> <span class="s1">&#39;720396530759385088-8bQxnzGDXXGHQB63eumuFYWnmL4nF6H&#39;</span>
-<span class="n">access_token_secret</span> <span class="o">=</span> <span class="s1">&#39;by2vprExn9FF4Sg2QJupvpZqhyiVYBr62FjB2VhkF0esv&#39;</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;config.json&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">credentials</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[92]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">credentials</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[92]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>{&#39;ACCESS_TOKEN&#39;: &#39;720396530759385088-8bQxnzGDXXGHQB63eumuFYWnmL4nF6H&#39;,
+ &#39;ACCESS_TOKEN_SECRET&#39;: &#39;by2vprExn9FF4Sg2QJupvpZqhyiVYBr62FjB2VhkF0esv&#39;,
+ &#39;CONSUMER_KEY&#39;: &#39;RRZFSHS1Nw8xH4eRyBaftyFfh&#39;,
+ &#39;CONSUMER_SECRET&#39;: &#39;xdw3qoO1OmwZsb95CpDNpY4X7nYOwwgGeAPN2y6oiI9xP6Xkbx&#39;}</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[95]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">consumer_key</span> <span class="o">=</span> <span class="n">credentials</span><span class="p">[</span><span class="s1">&#39;CONSUMER_KEY&#39;</span><span class="p">]</span> 
+<span class="n">consumer_secret</span> <span class="o">=</span> <span class="n">credentials</span><span class="p">[</span><span class="s1">&#39;CONSUMER_SECRET&#39;</span><span class="p">]</span>
+<span class="n">access_token</span> <span class="o">=</span> <span class="n">credentials</span><span class="p">[</span><span class="s1">&#39;ACCESS_TOKEN&#39;</span><span class="p">]</span>
+<span class="n">access_token_secret</span> <span class="o">=</span> <span class="n">credentials</span><span class="p">[</span><span class="s1">&#39;ACCESS_TOKEN_SECRET&#39;</span><span class="p">]</span>
 </pre></div>
 
 </div>
@@ -12404,6 +12454,135 @@ twitter_stream.filter(track=['#python'])</p>
 </div>
 </div>
 
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Part-4:-Term-Co-occurrences">Part 4: Term Co-occurrences<a class="anchor-link" href="#Part-4:-Term-Co-occurrences">&#182;</a></h1>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>In this part, we will stream recents tweets about this last European Champion's Leagues matchs played this week.
+So, will use the stream function to stream the #UCL .</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Launch a real time listener on #UCL</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[74]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">query</span> <span class="o">=</span> <span class="s1">&#39;#UCL&#39;</span>
+<span class="n">max_tweets</span> <span class="o">=</span> <span class="mi">1000</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[75]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">searched_tweets</span> <span class="o">=</span> <span class="p">[</span><span class="n">status</span> <span class="k">for</span> <span class="n">status</span> <span class="ow">in</span> <span class="n">tweepy</span><span class="o">.</span><span class="n">Cursor</span><span class="p">(</span><span class="n">api</span><span class="o">.</span><span class="n">search</span><span class="p">,</span> <span class="n">q</span><span class="o">=</span><span class="n">query</span><span class="p">)</span><span class="o">.</span><span class="n">items</span><span class="p">(</span><span class="n">max_tweets</span><span class="p">)]</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_text output_error">
+<pre>
+<span class="ansi-red-intense-fg ansi-bold">---------------------------------------------------------------------------</span>
+<span class="ansi-red-intense-fg ansi-bold">TweepError</span>                                Traceback (most recent call last)
+<span class="ansi-green-intense-fg ansi-bold">&lt;ipython-input-75-28d00681c5c9&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span><span class="ansi-blue-intense-fg ansi-bold">()</span>
+<span class="ansi-green-intense-fg ansi-bold">----&gt; 1</span><span class="ansi-yellow-intense-fg ansi-bold"> </span>searched_tweets <span class="ansi-yellow-intense-fg ansi-bold">=</span> <span class="ansi-yellow-intense-fg ansi-bold">[</span>status <span class="ansi-green-intense-fg ansi-bold">for</span> status <span class="ansi-green-intense-fg ansi-bold">in</span> tweepy<span class="ansi-yellow-intense-fg ansi-bold">.</span>Cursor<span class="ansi-yellow-intense-fg ansi-bold">(</span>api<span class="ansi-yellow-intense-fg ansi-bold">.</span>search<span class="ansi-yellow-intense-fg ansi-bold">,</span> q<span class="ansi-yellow-intense-fg ansi-bold">=</span>query<span class="ansi-yellow-intense-fg ansi-bold">)</span><span class="ansi-yellow-intense-fg ansi-bold">.</span>items<span class="ansi-yellow-intense-fg ansi-bold">(</span>max_tweets<span class="ansi-yellow-intense-fg ansi-bold">)</span><span class="ansi-yellow-intense-fg ansi-bold">]</span>
+
+<span class="ansi-green-intense-fg ansi-bold">&lt;ipython-input-75-28d00681c5c9&gt;</span> in <span class="ansi-cyan-fg">&lt;listcomp&gt;</span><span class="ansi-blue-intense-fg ansi-bold">(.0)</span>
+<span class="ansi-green-intense-fg ansi-bold">----&gt; 1</span><span class="ansi-yellow-intense-fg ansi-bold"> </span>searched_tweets <span class="ansi-yellow-intense-fg ansi-bold">=</span> <span class="ansi-yellow-intense-fg ansi-bold">[</span>status <span class="ansi-green-intense-fg ansi-bold">for</span> status <span class="ansi-green-intense-fg ansi-bold">in</span> tweepy<span class="ansi-yellow-intense-fg ansi-bold">.</span>Cursor<span class="ansi-yellow-intense-fg ansi-bold">(</span>api<span class="ansi-yellow-intense-fg ansi-bold">.</span>search<span class="ansi-yellow-intense-fg ansi-bold">,</span> q<span class="ansi-yellow-intense-fg ansi-bold">=</span>query<span class="ansi-yellow-intense-fg ansi-bold">)</span><span class="ansi-yellow-intense-fg ansi-bold">.</span>items<span class="ansi-yellow-intense-fg ansi-bold">(</span>max_tweets<span class="ansi-yellow-intense-fg ansi-bold">)</span><span class="ansi-yellow-intense-fg ansi-bold">]</span>
+
+<span class="ansi-green-intense-fg ansi-bold">~\Anaconda3\lib\site-packages\tweepy\cursor.py</span> in <span class="ansi-cyan-fg">__next__</span><span class="ansi-blue-intense-fg ansi-bold">(self)</span>
+<span class="ansi-green-fg">     47</span> 
+<span class="ansi-green-fg">     48</span>     <span class="ansi-green-intense-fg ansi-bold">def</span> __next__<span class="ansi-yellow-intense-fg ansi-bold">(</span>self<span class="ansi-yellow-intense-fg ansi-bold">)</span><span class="ansi-yellow-intense-fg ansi-bold">:</span>
+<span class="ansi-green-intense-fg ansi-bold">---&gt; 49</span><span class="ansi-yellow-intense-fg ansi-bold">         </span><span class="ansi-green-intense-fg ansi-bold">return</span> self<span class="ansi-yellow-intense-fg ansi-bold">.</span>next<span class="ansi-yellow-intense-fg ansi-bold">(</span><span class="ansi-yellow-intense-fg ansi-bold">)</span>
+<span class="ansi-green-fg">     50</span> 
+<span class="ansi-green-fg">     51</span>     <span class="ansi-green-intense-fg ansi-bold">def</span> next<span class="ansi-yellow-intense-fg ansi-bold">(</span>self<span class="ansi-yellow-intense-fg ansi-bold">)</span><span class="ansi-yellow-intense-fg ansi-bold">:</span>
+
+<span class="ansi-green-intense-fg ansi-bold">~\Anaconda3\lib\site-packages\tweepy\cursor.py</span> in <span class="ansi-cyan-fg">next</span><span class="ansi-blue-intense-fg ansi-bold">(self)</span>
+<span class="ansi-green-fg">    195</span>         <span class="ansi-green-intense-fg ansi-bold">if</span> self<span class="ansi-yellow-intense-fg ansi-bold">.</span>current_page <span class="ansi-green-intense-fg ansi-bold">is</span> <span class="ansi-green-intense-fg ansi-bold">None</span> <span class="ansi-green-intense-fg ansi-bold">or</span> self<span class="ansi-yellow-intense-fg ansi-bold">.</span>page_index <span class="ansi-yellow-intense-fg ansi-bold">==</span> len<span class="ansi-yellow-intense-fg ansi-bold">(</span>self<span class="ansi-yellow-intense-fg ansi-bold">.</span>current_page<span class="ansi-yellow-intense-fg ansi-bold">)</span> <span class="ansi-yellow-intense-fg ansi-bold">-</span> <span class="ansi-cyan-intense-fg ansi-bold">1</span><span class="ansi-yellow-intense-fg ansi-bold">:</span>
+<span class="ansi-green-fg">    196</span>             <span class="ansi-red-intense-fg ansi-bold"># Reached end of current page, get the next page...</span>
+<span class="ansi-green-intense-fg ansi-bold">--&gt; 197</span><span class="ansi-yellow-intense-fg ansi-bold">             </span>self<span class="ansi-yellow-intense-fg ansi-bold">.</span>current_page <span class="ansi-yellow-intense-fg ansi-bold">=</span> self<span class="ansi-yellow-intense-fg ansi-bold">.</span>page_iterator<span class="ansi-yellow-intense-fg ansi-bold">.</span>next<span class="ansi-yellow-intense-fg ansi-bold">(</span><span class="ansi-yellow-intense-fg ansi-bold">)</span>
+<span class="ansi-green-fg">    198</span>             self<span class="ansi-yellow-intense-fg ansi-bold">.</span>page_index <span class="ansi-yellow-intense-fg ansi-bold">=</span> <span class="ansi-yellow-intense-fg ansi-bold">-</span><span class="ansi-cyan-intense-fg ansi-bold">1</span>
+<span class="ansi-green-fg">    199</span>         self<span class="ansi-yellow-intense-fg ansi-bold">.</span>page_index <span class="ansi-yellow-intense-fg ansi-bold">+=</span> <span class="ansi-cyan-intense-fg ansi-bold">1</span>
+
+<span class="ansi-green-intense-fg ansi-bold">~\Anaconda3\lib\site-packages\tweepy\cursor.py</span> in <span class="ansi-cyan-fg">next</span><span class="ansi-blue-intense-fg ansi-bold">(self)</span>
+<span class="ansi-green-fg">    106</span> 
+<span class="ansi-green-fg">    107</span>         <span class="ansi-green-intense-fg ansi-bold">if</span> self<span class="ansi-yellow-intense-fg ansi-bold">.</span>index <span class="ansi-yellow-intense-fg ansi-bold">&gt;=</span> len<span class="ansi-yellow-intense-fg ansi-bold">(</span>self<span class="ansi-yellow-intense-fg ansi-bold">.</span>results<span class="ansi-yellow-intense-fg ansi-bold">)</span> <span class="ansi-yellow-intense-fg ansi-bold">-</span> <span class="ansi-cyan-intense-fg ansi-bold">1</span><span class="ansi-yellow-intense-fg ansi-bold">:</span>
+<span class="ansi-green-intense-fg ansi-bold">--&gt; 108</span><span class="ansi-yellow-intense-fg ansi-bold">             </span>data <span class="ansi-yellow-intense-fg ansi-bold">=</span> self<span class="ansi-yellow-intense-fg ansi-bold">.</span>method<span class="ansi-yellow-intense-fg ansi-bold">(</span>max_id<span class="ansi-yellow-intense-fg ansi-bold">=</span>self<span class="ansi-yellow-intense-fg ansi-bold">.</span>max_id<span class="ansi-yellow-intense-fg ansi-bold">,</span> parser<span class="ansi-yellow-intense-fg ansi-bold">=</span>RawParser<span class="ansi-yellow-intense-fg ansi-bold">(</span><span class="ansi-yellow-intense-fg ansi-bold">)</span><span class="ansi-yellow-intense-fg ansi-bold">,</span> <span class="ansi-yellow-intense-fg ansi-bold">*</span>self<span class="ansi-yellow-intense-fg ansi-bold">.</span>args<span class="ansi-yellow-intense-fg ansi-bold">,</span> <span class="ansi-yellow-intense-fg ansi-bold">**</span>self<span class="ansi-yellow-intense-fg ansi-bold">.</span>kargs<span class="ansi-yellow-intense-fg ansi-bold">)</span>
+<span class="ansi-green-fg">    109</span> 
+<span class="ansi-green-fg">    110</span>             <span class="ansi-green-intense-fg ansi-bold">if</span> hasattr<span class="ansi-yellow-intense-fg ansi-bold">(</span>self<span class="ansi-yellow-intense-fg ansi-bold">.</span>method<span class="ansi-yellow-intense-fg ansi-bold">,</span> <span class="ansi-blue-intense-fg ansi-bold">&#39;__self__&#39;</span><span class="ansi-yellow-intense-fg ansi-bold">)</span><span class="ansi-yellow-intense-fg ansi-bold">:</span>
+
+<span class="ansi-green-intense-fg ansi-bold">~\Anaconda3\lib\site-packages\tweepy\binder.py</span> in <span class="ansi-cyan-fg">_call</span><span class="ansi-blue-intense-fg ansi-bold">(*args, **kwargs)</span>
+<span class="ansi-green-fg">    248</span>             <span class="ansi-green-intense-fg ansi-bold">return</span> method
+<span class="ansi-green-fg">    249</span>         <span class="ansi-green-intense-fg ansi-bold">else</span><span class="ansi-yellow-intense-fg ansi-bold">:</span>
+<span class="ansi-green-intense-fg ansi-bold">--&gt; 250</span><span class="ansi-yellow-intense-fg ansi-bold">             </span><span class="ansi-green-intense-fg ansi-bold">return</span> method<span class="ansi-yellow-intense-fg ansi-bold">.</span>execute<span class="ansi-yellow-intense-fg ansi-bold">(</span><span class="ansi-yellow-intense-fg ansi-bold">)</span>
+<span class="ansi-green-fg">    251</span> 
+<span class="ansi-green-fg">    252</span>     <span class="ansi-red-intense-fg ansi-bold"># Set pagination mode</span>
+
+<span class="ansi-green-intense-fg ansi-bold">~\Anaconda3\lib\site-packages\tweepy\binder.py</span> in <span class="ansi-cyan-fg">execute</span><span class="ansi-blue-intense-fg ansi-bold">(self)</span>
+<span class="ansi-green-fg">    232</span>                     <span class="ansi-green-intense-fg ansi-bold">raise</span> RateLimitError<span class="ansi-yellow-intense-fg ansi-bold">(</span>error_msg<span class="ansi-yellow-intense-fg ansi-bold">,</span> resp<span class="ansi-yellow-intense-fg ansi-bold">)</span>
+<span class="ansi-green-fg">    233</span>                 <span class="ansi-green-intense-fg ansi-bold">else</span><span class="ansi-yellow-intense-fg ansi-bold">:</span>
+<span class="ansi-green-intense-fg ansi-bold">--&gt; 234</span><span class="ansi-yellow-intense-fg ansi-bold">                     </span><span class="ansi-green-intense-fg ansi-bold">raise</span> TweepError<span class="ansi-yellow-intense-fg ansi-bold">(</span>error_msg<span class="ansi-yellow-intense-fg ansi-bold">,</span> resp<span class="ansi-yellow-intense-fg ansi-bold">,</span> api_code<span class="ansi-yellow-intense-fg ansi-bold">=</span>api_error_code<span class="ansi-yellow-intense-fg ansi-bold">)</span>
+<span class="ansi-green-fg">    235</span> 
+<span class="ansi-green-fg">    236</span>             <span class="ansi-red-intense-fg ansi-bold"># Parse the response payload</span>
+
+<span class="ansi-red-intense-fg ansi-bold">TweepError</span>: Twitter error response: status code = 429</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">twitter_stream</span> <span class="o">=</span> <span class="n">Stream</span><span class="p">(</span><span class="n">auth</span><span class="p">,</span> <span class="n">MyListener</span><span class="p">())</span>
+<span class="n">twitter_stream</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">track</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;#UCL&#39;</span><span class="p">],</span> <span class="k">async</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+
+</div>
 </div>
 </div>
 

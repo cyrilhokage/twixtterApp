@@ -62,13 +62,26 @@ from nltk import bigrams
 
 # # Part 1: Collecting data
 
-# In[3]:
+# In[91]:
 
 
-consumer_key = 'RRZFSHS1Nw8xH4eRyBaftyFfh'
-consumer_secret = 'xdw3qoO1OmwZsb95CpDNpY4X7nYOwwgGeAPN2y6oiI9xP6Xkbx'
-access_token = '720396530759385088-8bQxnzGDXXGHQB63eumuFYWnmL4nF6H'
-access_token_secret = 'by2vprExn9FF4Sg2QJupvpZqhyiVYBr62FjB2VhkF0esv'
+with open('config.json') as f:
+    credentials = json.load(f)
+
+
+# In[92]:
+
+
+credentials
+
+
+# In[95]:
+
+
+consumer_key = credentials['CONSUMER_KEY'] 
+consumer_secret = credentials['CONSUMER_SECRET']
+access_token = credentials['ACCESS_TOKEN']
+access_token_secret = credentials['ACCESS_TOKEN_SECRET']
 
 
 # In[4]:
@@ -248,4 +261,31 @@ terms_bigram = bigrams(terms_stop)
 
 
 print(list(terms_bigram))
+
+
+# # Part 4: Term Co-occurrences
+
+# In this part, we will stream recents tweets about this last European Champion's Leagues matchs played this week.
+# So, will use the stream function to stream the #UCL .
+
+# Launch a real time listener on #UCL
+
+# In[74]:
+
+
+query = '#UCL'
+max_tweets = 1000
+
+
+# In[75]:
+
+
+searched_tweets = [status for status in tweepy.Cursor(api.search, q=query).items(max_tweets)]
+
+
+# In[ ]:
+
+
+twitter_stream = Stream(auth, MyListener())
+twitter_stream.filter(track=['#UCL'], async=True)
 
