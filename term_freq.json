@@ -1,0 +1,195 @@
+{
+  "axes": [
+    {
+      "scale": "x",
+      "type": "x"
+    },
+    {
+      "scale": "y",
+      "type": "y"
+    }
+  ],
+  "data": [
+    {
+      "name": "table",
+      "values": [
+        {
+          "col": "data",
+          "idx": "Messi",
+          "val": 328
+        },
+        {
+          "col": "data",
+          "idx": "\u26bd",
+          "val": 304
+        },
+        {
+          "col": "data",
+          "idx": "\ud83c\udfc6",
+          "val": 243
+        },
+        {
+          "col": "data",
+          "idx": "Week",
+          "val": 155
+        },
+        {
+          "col": "data",
+          "idx": "Goal",
+          "val": 135
+        },
+        {
+          "col": "data",
+          "idx": "Sterling",
+          "val": 130
+        },
+        {
+          "col": "data",
+          "idx": "Lionel",
+          "val": 126
+        },
+        {
+          "col": "data",
+          "idx": "David",
+          "val": 126
+        },
+        {
+          "col": "data",
+          "idx": "Neres",
+          "val": 125
+        },
+        {
+          "col": "data",
+          "idx": "Raheem",
+          "val": 124
+        },
+        {
+          "col": "data",
+          "idx": "Philippe",
+          "val": 124
+        },
+        {
+          "col": "data",
+          "idx": "Coutinho",
+          "val": 124
+        },
+        {
+          "col": "data",
+          "idx": "\ud83e\udd14",
+          "val": 117
+        },
+        {
+          "col": "data",
+          "idx": "Agree",
+          "val": 117
+        },
+        {
+          "col": "data",
+          "idx": "ord",
+          "val": 117
+        }
+      ]
+    },
+    {
+      "name": "stats",
+      "source": "table",
+      "transform": [
+        {
+          "keys": [
+            "data.idx"
+          ],
+          "type": "facet"
+        },
+        {
+          "type": "stats",
+          "value": "data.val"
+        }
+      ]
+    }
+  ],
+  "height": 500,
+  "legends": [],
+  "marks": [
+    {
+      "from": {
+        "data": "table",
+        "transform": [
+          {
+            "keys": [
+              "data.col"
+            ],
+            "type": "facet"
+          },
+          {
+            "height": "data.val",
+            "point": "data.idx",
+            "type": "stack"
+          }
+        ]
+      },
+      "marks": [
+        {
+          "properties": {
+            "enter": {
+              "fill": {
+                "field": "data.col",
+                "scale": "color"
+              },
+              "width": {
+                "band": true,
+                "offset": -1,
+                "scale": "x"
+              },
+              "x": {
+                "field": "data.idx",
+                "scale": "x"
+              },
+              "y": {
+                "field": "y",
+                "scale": "y"
+              },
+              "y2": {
+                "field": "y2",
+                "scale": "y"
+              }
+            }
+          },
+          "type": "rect"
+        }
+      ],
+      "type": "group"
+    }
+  ],
+  "padding": "auto",
+  "scales": [
+    {
+      "domain": {
+        "data": "table",
+        "field": "data.idx"
+      },
+      "name": "x",
+      "range": "width",
+      "type": "ordinal",
+      "zero": false
+    },
+    {
+      "domain": {
+        "data": "stats",
+        "field": "sum"
+      },
+      "name": "y",
+      "nice": true,
+      "range": "height"
+    },
+    {
+      "domain": {
+        "data": "table",
+        "field": "data.col"
+      },
+      "name": "color",
+      "range": "category20",
+      "type": "ordinal"
+    }
+  ],
+  "width": 960
+}
